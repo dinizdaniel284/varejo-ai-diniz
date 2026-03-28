@@ -2,11 +2,9 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  // Começa na HOME pra mostrar o banner de impacto
   const [tab, setTab] = useState('home');
   const [cart, setCart] = useState<any[]>([]);
 
-  // 10 PRODUTOS FICTÍCIOS COM IMAGENS ESTÁVEIS
   const MOCK_PRODUCTS = [
     { id: 1, nome: "Carrinho Speed Racing", preco: 9.90, img: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=400" },
     { id: 2, nome: "Boneca Fashion Kids", preco: 15.00, img: "https://images.unsplash.com/photo-1559441165-27663a75871b?w=400" },
@@ -22,9 +20,28 @@ function App() {
 
   const total = cart.reduce((acc, i) => acc + i.preco, 0);
 
+  // FUNÇÃO MATADORA: ENVIO PARA WHATSAPP
+  const finalizarPedido = () => {
+    if (cart.length === 0) return;
+
+    const listaProdutos = cart.map(item => `- ${item.nome}: R$ ${item.preco.toFixed(2)}`).join('%0A');
+    const totalPedido = total.toFixed(2);
+    const mensagem = `*NOVO PEDIDO - DINIZ STORE*%0A%0A` +
+                     `*Produtos:*%0A${listaProdutos}%0A%0A` + 
+                     `*Total:* R$ ${totalPedido}%0A%0A` +
+                     `👉 _Favor confirmar a disponibilidade para entrega em Santa Rita!_`;
+
+    const seuNumero = "5519999999999"; // Coloque seu número real aqui (Ex: 55199...)
+    window.open(`https://api.whatsapp.com/send?phone=${seuNumero}&text=${mensagem}`, '_blank');
+    setCart([]); // Limpa o carrinho após enviar
+  };
+
+  const removerDoCarrinho = (indexParaRemover: number) => {
+    setCart(cart.filter((_, index) => index !== indexParaRemover));
+  };
+
   return (
     <div>
-      {/* HEADER DE NAVEGAÇÃO FIXO */}
       <nav className="nav-pills">
         <h2 style={{position: 'absolute', left: '40px', color: 'var(--primary)', margin: 0}}>DINIZ STORE</h2>
         <div style={{display: 'flex', gap: '10px'}}>
@@ -36,8 +53,6 @@ function App() {
       </nav>
 
       <div className="container">
-        
-        {/* === SEÇÃO HOME: BANNER + INFO + FEEDBACK === */}
         {tab === 'home' && (
           <section className="fade-in">
             <div className="hero-retail">
@@ -46,7 +61,6 @@ function App() {
               <button className="btn-finalize" style={{width: '280px'}} onClick={() => setTab('vendas')}>ABRIR VITRINE AGORA</button>
             </div>
 
-            {/* CARDS DE INFORMAÇÃO COMPLEMENTAR */}
             <div className="info-bar-grid">
               <div className="info-item-card">
                 <h4>📍 Onde Estamos</h4>
@@ -69,7 +83,6 @@ function App() {
           </section>
         )}
 
-        {/* === SEÇÃO COMPRAR: VITRINE AJUSTADA + CARRINHO === */}
         {tab === 'vendas' && (
           <div className="layout-vendas fade-in">
             <div className="products-grid">
@@ -90,9 +103,9 @@ function App() {
               <div className="cart-list">
                 {cart.length === 0 ? <p style={{textAlign: 'center', color: '#94a3b8', padding: '20px 0'}}>Sacola Vazia</p> : 
                   cart.map((item, idx) => (
-                    <div key={idx} className="cart-item">
+                    <div key={idx} className="cart-item" onClick={() => removerDoCarrinho(idx)} style={{cursor: 'pointer'}} title="Clique para remover">
                       <span>{item.nome}</span>
-                      <strong>R$ {item.preco.toFixed(2)}</strong>
+                      <strong>R$ {item.preco.toFixed(2)} ❌</strong>
                     </div>
                   ))
                 }
@@ -101,23 +114,28 @@ function App() {
                 <span style={{fontWeight: 700, color: '#166534'}}>TOTAL A PAGAR:</span>
                 <span className="total-amount">R$ {total.toFixed(2)}</span>
               </div>
-              <button className="btn-finalize" disabled={cart.length === 0} onClick={() => {alert('Simulação PIX Gerada!'); setCart([])}}>
-                FINALIZAR PEDIDO
+              <button 
+                className="btn-finalize" 
+                disabled={cart.length === 0} 
+                onClick={finalizarPedido}
+                style={{background: cart.length > 0 ? 'var(--whatsapp)' : '#cbd5e1'}}
+              >
+                FINALIZAR NO WHATSAPP
               </button>
             </aside>
           </div>
         )}
 
-        {/* === SEÇÃO CONTATO: WHATSAPP === */}
         {tab === 'contato' && (
           <section className="fade-in" style={{textAlign: 'center', padding: '80px 0'}}>
             <h2 style={{fontSize: '2.5rem'}}>Fale com o Gerente</h2>
             <p style={{color: '#64748b', marginBottom: '30px'}}>Tire suas dúvidas agora mesmo pelo WhatsApp.</p>
-            <button className="btn-whatsapp">🟢 CHAMAR NO WHATSAPP</button>
+            <button className="btn-whatsapp" onClick={() => window.open('https://wa.me/5519999999999', '_blank')}>
+              🟢 CHAMAR NO WHATSAPP
+            </button>
           </section>
         )}
 
-        {/* === SEÇÃO ADMIN === */}
         {tab === 'admin' && (
           <section className="fade-in" style={{maxWidth: '600px', margin: '40px auto'}}>
             <div className="cart-sidebar">
@@ -130,19 +148,15 @@ function App() {
             </div>
           </section>
         )}
-
       </div>
 
       <footer className="footer-premium">
         <p><strong>DINIZ STORE</strong> - Varejo Inteligente em Santa Rita-SP</p>
-        
-        {/* NOVOS CANAIS SOCIAIS */}
         <div className="social-links">
           <a href="#" className="social-icon">📸 INSTAGRAM</a>
           <a href="#" className="social-icon">🔵 FACEBOOK</a>
           <a href="#" className="social-icon">✈️ TELEGRAM</a>
         </div>
-
         <p style={{fontSize: '0.8rem', marginTop: '20px', opacity: 0.6}}>
           © 2026 Solução desenvolvida pela <strong>Agência IA Diniz</strong>
         </p>
