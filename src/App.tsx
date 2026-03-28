@@ -20,10 +20,8 @@ function App() {
 
   const total = cart.reduce((acc, i) => acc + i.preco, 0);
 
-  // FUNÇÃO MATADORA: ENVIO PARA WHATSAPP
   const finalizarPedido = () => {
     if (cart.length === 0) return;
-
     const listaProdutos = cart.map(item => `- ${item.nome}: R$ ${item.preco.toFixed(2)}`).join('%0A');
     const totalPedido = total.toFixed(2);
     const mensagem = `*NOVO PEDIDO - DINIZ STORE*%0A%0A` +
@@ -31,9 +29,9 @@ function App() {
                      `*Total:* R$ ${totalPedido}%0A%0A` +
                      `👉 _Favor confirmar a disponibilidade para entrega em Santa Rita!_`;
 
-    const seuNumero = "5519999999999"; // Coloque seu número real aqui (Ex: 55199...)
+    const seuNumero = "5519999999999"; 
     window.open(`https://api.whatsapp.com/send?phone=${seuNumero}&text=${mensagem}`, '_blank');
-    setCart([]); // Limpa o carrinho após enviar
+    setCart([]);
   };
 
   const removerDoCarrinho = (indexParaRemover: number) => {
@@ -43,8 +41,8 @@ function App() {
   return (
     <div>
       <nav className="nav-pills">
-        <h2 style={{position: 'absolute', left: '40px', color: 'var(--primary)', margin: 0}}>DINIZ STORE</h2>
-        <div style={{display: 'flex', gap: '10px'}}>
+        <h2 className="nav-title">DINIZ STORE</h2> {/* AQUI A CLASSE QUE CRIAMOS */}
+        <div style={{display: 'flex', gap: '8px'}}>
           <button className={tab === 'home' ? 'active' : ''} onClick={() => setTab('home')}>🏠 HOME</button>
           <button className={tab === 'vendas' ? 'active' : ''} onClick={() => setTab('vendas')}>🛒 COMPRAR</button>
           <button className={tab === 'contato' ? 'active' : ''} onClick={() => setTab('contato')}>💬 WHATSAPP</button>
@@ -166,3 +164,4 @@ function App() {
 }
 
 export default App
+            
