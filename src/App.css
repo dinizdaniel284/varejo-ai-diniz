@@ -1,187 +1,183 @@
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --success: #16a34a;
+  --primary: #000000; /* Preto para sofisticação */
+  --accent: #ff3b30; /* Vermelho Alerta para Preços e Urgência */
   --whatsapp: #25d366;
-  --bg-light: #f1f5f9;
-  --text-dark: #0f172a;
-  --white: #ffffff;
-  --urgency: #dc2626;
+  --bg-body: #ffffff;
+  --bg-card: #f8f9fa;
+  --text-main: #1c1c1e;
+  --text-muted: #8e8e93;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 body {
-  background-color: var(--bg-light);
-  font-family: 'Inter', sans-serif;
-  color: var(--text-dark);
+  background-color: var(--bg-body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  line-height: 1.4;
 }
 
-.container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+.container { max-width: 600px; margin: 0 auto; padding: 0 16px; }
 
-/* --- NAVEGAÇÃO FIXA --- */
-.nav-pills {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  padding: 15px;
-  background: var(--white);
-  border-bottom: 1px solid #e2e8f0;
+/* --- HEADER CLEAN --- */
+.header-minimal {
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  background: #fff;
+  z-index: 100;
 }
 
-.nav-title {
-  position: absolute;
-  left: 40px;
-  color: var(--primary);
-  margin: 0;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
+.header-minimal h1 { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
 
-.nav-pills button {
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: none;
-  background: #f1f5f9;
-  font-weight: 700;
-  color: #64748b;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nav-pills button.active {
+/* --- HERO: OFERTA DO DIA (Gatilho de Urgência) --- */
+.hero-flash {
   background: var(--primary);
-  color: var(--white);
+  color: #fff;
+  padding: 30px 20px;
+  border-radius: 16px;
+  margin: 16px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- HERO BANNER (ESTILO HAVAN) --- */
-.hero-retail {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-              url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1920');
-  background-size: cover;
-  background-position: center;
-  height: 400px;
+.hero-flash h2 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+.hero-flash p { font-size: 1rem; opacity: 0.8; margin-bottom: 20px; }
+
+/* --- CATEGORIAS EM ÍCONES --- */
+.categories-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0 25px;
+  scrollbar-width: none;
+}
+
+.cat-item {
+  min-width: 80px;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.cat-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-card);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 8px;
+  transition: 0.2s;
+}
+
+.cat-item.active .cat-icon { background: var(--primary); color: #fff; }
+
+/* --- GRID DE PRODUTOS (FOCO NO PREÇO) --- */
+.product-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card-vendas {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  color: var(--white);
-  margin: 20px 0;
-  text-align: center;
 }
 
-.hero-retail h2 { font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 10px; }
-
-/* --- GRID DE VENDAS AGRESSIVO --- */
-.layout-vendas {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 30px;
-  margin-top: 20px;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  background: var(--white);
-  border-radius: 15px;
-  padding: 15px;
-  border: 1px solid #e2e8f0;
-  position: relative;
-  transition: 0.3s;
-}
-
-.product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-/* SELO DE URGÊNCIA */
-.badge-flash {
-  background: var(--urgency);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 5px;
-  font-size: 0.7rem;
-  font-weight: 900;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 5;
-}
-
-.product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
-
-.product-info h3 { font-size: 1rem; margin: 10px 0 5px; color: #334155; height: 40px; overflow: hidden; }
-
-.price-de { font-size: 0.8rem; color: #94a3b8; text-decoration: line-through; }
-.price-tag { color: var(--success); font-size: 1.6rem; font-weight: 900; margin-bottom: 10px; }
-
-.btn-buy-fast {
-  background: #000;
-  color: white;
-  border: none;
+.card-img {
   width: 100%;
-  padding: 12px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card-vendas h3 { font-size: 0.9rem; font-weight: 600; height: 36px; overflow: hidden; margin-bottom: 5px; }
+
+.price-box { margin-bottom: 10px; }
+.price-label { font-size: 0.7rem; color: var(--text-muted); text-decoration: line-through; }
+.price-value { font-size: 1.4rem; font-weight: 900; color: var(--accent); }
+
+/* --- BOTÕES DE AÇÃO --- */
+.btn-zap-main {
+  background: var(--whatsapp);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
   font-weight: 800;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-small-buy {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
   cursor: pointer;
 }
 
-/* --- SACOLA --- */
-.cart-sidebar {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 20px;
-  border: 1px solid #e2e8f0;
-  position: sticky;
-  top: 90px;
+/* --- SEÇÃO LOCAL & FEEDBACK --- */
+.local-info {
+  background: #fdf2f2;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 30px 0;
+  border: 1px dashed var(--accent);
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #f1f5f9;
-}
+.local-info h4 { color: var(--accent); margin-bottom: 5px; }
 
-.total-box {
-  background: #f0fdf4;
+.feedback-section { margin: 30px 0; }
+.feedback-bubble {
+  background: var(--bg-card);
   padding: 15px;
   border-radius: 12px;
-  margin: 15px 0;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+/* --- FOOTER & BOTÃO FIXO --- */
+.footer {
+  padding: 40px 0 100px;
   text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
-.total-box span { font-size: 2rem; font-weight: 900; color: #15803d; }
-
-/* --- INFO BAR --- */
-.info-bar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin-top: -30px;
-  margin-bottom: 30px;
-}
-
-.info-item-card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-
-.footer-premium { background: #0f172a; color: #94a3b8; padding: 40px 0; text-align: center; margin-top: 60px; }
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 850px) {
-  .nav-title { display: none !important; }
-  .nav-pills { justify-content: center; }
-  .nav-pills button { padding: 8px 12px; font-size: 0.8rem; }
-  .layout-vendas { grid-template-columns: 1fr; }
-  .hero-retail h2 { font-size: 2.2rem; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .product-img { height: 130px; }
+.btn-float-zap {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--whatsapp);
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 1000;
+  text-decoration: none;
   }
