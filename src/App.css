@@ -3,48 +3,190 @@
   --bg: #f8fafc;
   --white: #ffffff;
   --text: #1e293b;
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow: 0 6px 25px rgba(0,0,0,0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-.container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+}
 
-/* --- NAVEGAÇÃO --- */
+/* CONTAINER */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* NAV */
 .main-nav {
-  display: flex; justify-content: center; gap: 10px; background: var(--white);
-  padding: 12px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--white);
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  border-radius: 0 0 16px 16px;
 }
+
 .nav-btn {
-  background: none; border: none; font-weight: 700; color: #64748b;
-  padding: 10px 15px; cursor: pointer; border-radius: 12px; font-size: 0.8rem;
+  flex: 1;
+  border: none;
+  font-weight: 700;
+  color: #64748b;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 0.85rem;
 }
-.nav-btn.active { background: var(--primary); color: var(--white); }
 
-/* --- BANNER --- */
+.nav-btn.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* BANNER */
 .main-banner {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1200');
-  background-size: cover; background-position: center; height: 280px;
-  border-radius: 20px; margin: 15px 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; color: white; text-align: center; padding: 20px;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1200');
+  background-size: cover;
+  background-position: center;
+  height: 260px;
+  border-radius: 20px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  color: white;
 }
 
-/* --- SEÇÕES --- */
-.section { background: var(--white); border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
-.section-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 12px; }
+.banner-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
 
-/* --- VITRINES --- */
-.horizontal-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scrollbar-width: none; }
-.shop-full-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.banner-sub {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  opacity: 0.9;
+}
 
-.product-card { background: #f1f5f9; border-radius: 15px; padding: 10px; text-align: center; min-width: 150px; }
-.product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; }
+/* SEÇÕES */
+.section {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
 
-/* --- IA NUVEM --- */
-.ai-cloud-chat { background: #eff6ff; border: 1px solid var(--primary); border-radius: 15px; padding: 15px; }
-.ai-input-group { display: flex; gap: 8px; margin-top: 10px; }
-.ai-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
 
-.fade-in { animation: fadeIn 0.4s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* PRODUTOS */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.shop-full-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.product-card {
+  background: #f1f5f9;
+  border-radius: 16px;
+  padding: 12px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 6px 0;
+}
+
+.product-price {
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.btn-buy {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* IA */
+.ai-cloud-chat {
+  background: #eff6ff;
+  border: 1px solid var(--primary);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.ai-input-group {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.ai-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+/* WHATSAPP */
+.whatsapp-btn {
+  display: block;
+  background: #25d366;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 800;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+/* ANIMAÇÃO */
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
