@@ -9,48 +9,42 @@
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
 
-/* --- NAVEGAÇÃO SUPERIOR --- */
+/* --- NAVEGAÇÃO --- */
 .main-nav {
-  display: flex; justify-content: center; gap: 15px; background: var(--white);
-  padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
+  display: flex; justify-content: center; gap: 10px; background: var(--white);
+  padding: 12px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
 }
 .nav-btn {
   background: none; border: none; font-weight: 700; color: #64748b;
-  padding: 10px 20px; cursor: pointer; border-radius: 12px; transition: 0.3s;
+  padding: 10px 15px; cursor: pointer; border-radius: 12px; font-size: 0.8rem;
 }
 .nav-btn.active { background: var(--primary); color: var(--white); }
 
-/* --- BANNER (HERO) --- */
+/* --- BANNER --- */
 .main-banner {
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1200');
-  background-size: cover; background-position: center; height: 350px;
-  border-radius: 24px; margin: 20px 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; color: white; text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1200');
+  background-size: cover; background-position: center; height: 280px;
+  border-radius: 20px; margin: 15px 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; color: white; text-align: center; padding: 20px;
 }
 
 /* --- SEÇÕES --- */
-.section { background: var(--white); border-radius: 20px; padding: 30px; margin-bottom: 25px; box-shadow: var(--shadow); }
-.section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
+.section { background: var(--white); border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
+.section-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; border-left: 4px solid var(--primary); padding-left: 12px; }
 
-/* --- VITRINE DE COMPRAS --- */
-.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-.product-card { background: var(--bg); border-radius: 18px; padding: 15px; text-align: center; transition: 0.3s; }
-.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-.product-card img { width: 100%; border-radius: 12px; margin-bottom: 12px; aspect-ratio: 1; object-fit: cover; }
+/* --- VITRINES --- */
+.horizontal-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scrollbar-width: none; }
+.shop-full-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
-/* --- CHAT IA INTEGRADO (ESTILO NUVEM) --- */
-.ai-cloud-chat {
-  background: #eff6ff; border: 2px solid var(--primary); border-radius: 20px; padding: 20px; margin-top: 15px;
-}
-.ai-input-group { display: flex; gap: 10px; margin-top: 15px; }
-.ai-input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; }
+.product-card { background: #f1f5f9; border-radius: 15px; padding: 10px; text-align: center; min-width: 150px; }
+.product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; }
 
-/* --- FEEDBACKS --- */
-.feedback-grid { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
-.feedback-card { min-width: 250px; background: #f1f5f9; padding: 15px; border-radius: 15px; font-style: italic; font-size: 0.9rem; }
+/* --- IA NUVEM --- */
+.ai-cloud-chat { background: #eff6ff; border: 1px solid var(--primary); border-radius: 15px; padding: 15px; }
+.ai-input-group { display: flex; gap: 8px; margin-top: 10px; }
+.ai-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 0.9rem; }
 
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 600px) { .shop-grid { grid-template-columns: 1fr 1fr; } .main-banner { height: 220px; } }
-                
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
