@@ -5,30 +5,28 @@
   box-sizing: border-box;
 }
 
-/* ROOT VARIABLES (opcional manter algumas) */
 :root {
   --text: #1e293b;
   --bg: #f8fafc;
 }
 
-/* HTML / BODY */
 html, body {
   width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ROOT APP (CORREÇÃO PRINCIPAL) */
+/* CORREÇÃO PARA PC: Centraliza o app sem forçar flexbox gigante */
 #root {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-/* GARANTIA CONTRA QUEBRA DE LAYOUT */
-img, video, canvas {
+img {
   max-width: 100%;
   height: auto;
   display: block;
