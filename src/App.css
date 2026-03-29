@@ -3,9 +3,10 @@
   --primary-hover: #1d4ed8;
   --success: #16a34a;
   --whatsapp: #25d366;
-  --bg-light: #f8fafc;
+  --bg-light: #f1f5f9;
   --text-dark: #0f172a;
   --white: #ffffff;
+  --urgency: #dc2626;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,13 +34,13 @@ body {
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Título no Desktop */
 .nav-title {
   position: absolute;
   left: 40px;
   color: var(--primary);
   margin: 0;
   font-weight: 900;
+  letter-spacing: -1px;
 }
 
 .nav-pills button {
@@ -51,9 +52,6 @@ body {
   color: #64748b;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .nav-pills button.active {
@@ -61,107 +59,129 @@ body {
   color: var(--white);
 }
 
-/* --- HERO BANNER --- */
+/* --- HERO BANNER (ESTILO HAVAN) --- */
 .hero-retail {
-  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
-              url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1920&auto=format&fit=crop');
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1920');
   background-size: cover;
   background-position: center;
-  height: 420px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 24px;
+  border-radius: 20px;
   color: var(--white);
-  margin: 30px 0;
+  margin: 20px 0;
   text-align: center;
-  padding: 0 20px;
 }
 
-.hero-retail h2 { font-size: 3.5rem; font-weight: 900; }
+.hero-retail h2 { font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 10px; }
 
-/* --- LAYOUT VENDAS --- */
+/* --- GRID DE VENDAS AGRESSIVO --- */
 .layout-vendas {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 30px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
 }
 
 .product-card {
   background: var(--white);
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 15px;
+  padding: 15px;
   border: 1px solid #e2e8f0;
-  text-align: center;
+  position: relative;
+  transition: 0.3s;
 }
 
-.product-img { width: 100%; height: 150px; object-fit: cover; border-radius: 12px; }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-.price-tag { color: var(--success); font-size: 1.5rem; font-weight: 800; margin: 10px 0; }
-
-.cart-sidebar {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 24px;
-  border: 1px solid #e2e8f0;
-  position: sticky;
-  top: 100px;
+/* SELO DE URGÊNCIA */
+.badge-flash {
+  background: var(--urgency);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
 }
 
-.btn-finalize {
-  background: var(--success);
-  color: var(--white);
+.product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
+
+.product-info h3 { font-size: 1rem; margin: 10px 0 5px; color: #334155; height: 40px; overflow: hidden; }
+
+.price-de { font-size: 0.8rem; color: #94a3b8; text-decoration: line-through; }
+.price-tag { color: var(--success); font-size: 1.6rem; font-weight: 900; margin-bottom: 10px; }
+
+.btn-buy-fast {
+  background: #000;
+  color: white;
   border: none;
   width: 100%;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 12px;
+  border-radius: 8px;
   font-weight: 800;
   cursor: pointer;
 }
 
+/* --- SACOLA --- */
+.cart-sidebar {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  position: sticky;
+  top: 90px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.total-box {
+  background: #f0fdf4;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.total-box span { font-size: 2rem; font-weight: 900; color: #15803d; }
+
+/* --- INFO BAR --- */
 .info-bar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: -40px;
-  margin-bottom: 40px;
+  gap: 15px;
+  margin-top: -30px;
+  margin-bottom: 30px;
 }
 
-.info-item-card { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.info-item-card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-.footer-premium { background: #0f172a; color: #94a3b8; padding: 50px 0; text-align: center; margin-top: 80px; }
+.footer-premium { background: #0f172a; color: #94a3b8; padding: 40px 0; text-align: center; margin-top: 60px; }
 
-/* =======================================================
-   RESPONSIVIDADE - O AJUSTE PARA O SEU CELULAR ESTÁ AQUI
-   ======================================================= */
+/* --- RESPONSIVIDADE --- */
 @media (max-width: 850px) {
-  
-  /* ESCONDE O NOME AZUL QUE POLUÍA O SISTEMA */
-  .nav-title {
-    display: none !important;
-  }
-
-  /* Centraliza e ajusta os botões do menu */
-  .nav-pills {
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .nav-pills button {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-    gap: 4px;
-  }
-
+  .nav-title { display: none !important; }
+  .nav-pills { justify-content: center; }
+  .nav-pills button { padding: 8px 12px; font-size: 0.8rem; }
   .layout-vendas { grid-template-columns: 1fr; }
-  .hero-retail h2 { font-size: 2rem; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } /* 2 colunas no celular */
-}
+  .hero-retail h2 { font-size: 2.2rem; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .product-img { height: 130px; }
+  }
