@@ -1,49 +1,56 @@
 :root {
-  --primary: #2563eb; /* Azul Confiança */
-  --accent: #ff3b30;  /* Vermelho Urgência */
-  --whatsapp: #25d366;
+  --primary: #2563eb;
   --bg: #f8fafc;
   --white: #ffffff;
+  --text: #1e293b;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-body { background: var(--bg); color: #1e293b; line-height: 1.5; }
+body { background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
 /* --- NAVEGAÇÃO SUPERIOR --- */
-.nav-tabs {
-  display: flex; justify-content: space-around; background: var(--white);
-  padding: 12px; position: sticky; top: 0; z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.main-nav {
+  display: flex; justify-content: center; gap: 15px; background: var(--white);
+  padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
 }
-.nav-tabs button {
+.nav-btn {
   background: none; border: none; font-weight: 700; color: #64748b;
-  font-size: 0.8rem; cursor: pointer; padding: 8px 16px; border-radius: 20px;
+  padding: 10px 20px; cursor: pointer; border-radius: 12px; transition: 0.3s;
 }
-.nav-tabs button.active { background: var(--primary); color: var(--white); }
+.nav-btn.active { background: var(--primary); color: var(--white); }
 
-/* --- HERO & SEÇÕES --- */
-.hero-box {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1000');
-  background-size: cover; height: 200px; display: flex; align-items: center;
-  justify-content: center; color: white; text-align: center; border-radius: 0 0 20px 20px;
+/* --- BANNER (HERO) --- */
+.main-banner {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=1200');
+  background-size: cover; background-position: center; height: 350px;
+  border-radius: 24px; margin: 20px 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; color: white; text-align: center;
 }
 
-.section-white { background: var(--white); padding: 25px 20px; margin-bottom: 15px; border-radius: 15px; }
+/* --- SEÇÕES --- */
+.section { background: var(--white); border-radius: 20px; padding: 30px; margin-bottom: 25px; box-shadow: var(--shadow); }
+.section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
 
-/* --- PRODUTOS & CARRINHO --- */
-.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-.card { background: white; padding: 12px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 12px; }
+/* --- VITRINE DE COMPRAS --- */
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.product-card { background: var(--bg); border-radius: 18px; padding: 15px; text-align: center; transition: 0.3s; }
+.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.product-card img { width: 100%; border-radius: 12px; margin-bottom: 12px; aspect-ratio: 1; object-fit: cover; }
 
-.btn-add { background: var(--primary); color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: 700; margin-top: 10px; }
-.btn-remove { background: #fee2e2; color: #ef4444; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; }
-
-/* --- CHATBOT FLOATING --- */
-.chat-ai-box {
-  position: fixed; bottom: 90px; right: 20px; width: 280px; 
-  background: var(--white); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  border: 1px solid #e2e8f0; overflow: hidden; animation: slideUp 0.3s;
+/* --- CHAT IA INTEGRADO (ESTILO NUVEM) --- */
+.ai-cloud-chat {
+  background: #eff6ff; border: 2px solid var(--primary); border-radius: 20px; padding: 20px; margin-top: 15px;
 }
-.chat-header { background: var(--primary); color: white; padding: 10px; font-size: 0.8rem; font-weight: 700; }
+.ai-input-group { display: flex; gap: 10px; margin-top: 15px; }
+.ai-input { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #cbd5e1; }
 
-@keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+/* --- FEEDBACKS --- */
+.feedback-grid { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
+.feedback-card { min-width: 250px; background: #f1f5f9; padding: 15px; border-radius: 15px; font-style: italic; font-size: 0.9rem; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 600px) { .shop-grid { grid-template-columns: 1fr 1fr; } .main-banner { height: 220px; } }
+                
